@@ -11,8 +11,10 @@ namespace Poker
             this.WinName = WinName;
         }
 
+        public EndGameContext() { }
+
         [ProtoMember(1)]
-        public string WinName { get; }
+        public string WinName { get; set; }
     }
 
     [ProtoContract]
@@ -22,6 +24,8 @@ namespace Poker
         {
             this.ShowdownCards = showdownCards;
         }
+
+        public EndHandContext() { }
 
         [ProtoMember(1)]
         public Dictionary<string, List<Card>> ShowdownCards { get; set; }
@@ -34,6 +38,8 @@ namespace Poker
         {
             this.RoundActions = roundActions;
         }
+
+        public EndRoundContext() { }
 
         [ProtoMember(1)]
         public List<PlayerActionName> RoundActions { get; set; }

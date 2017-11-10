@@ -42,8 +42,30 @@ namespace Poker
             DrawSingleHideCard(this.row + 4, width / 2 - 14);
             DrawSingleHideCard(this.row + 4, width / 2 + 6);
 
+            DrawSingleHideCard(this.row + 4, width / 2 + 27);
+            DrawSingleHideCard(this.row + 4, width / 2 + 22);
+
             base.StartHand(context);
         }
+
+        public override void EndHand(IEndHandContext context)
+        {
+            this.UpdateCommonRow(0);
+            if (context.ShowdownCards != null)
+            {
+                context.ShowdownCards.Remove(this.Player.Name);
+                foreach (KeyValuePair<string, List<Card>> pair in context.ShowdownCards)
+                {
+
+                    this.DrawSingleCard(this.row + 4, width / 2 + 27, pair.Value[1]);
+                    this.DrawSingleCard(this.row + 4, width / 2 + 22, pair.Value[0]);
+
+                }
+            }
+
+            base.EndHand(context);
+        }
+
 
         private void UpdateCommonRow(int pot)
         {

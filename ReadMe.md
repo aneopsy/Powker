@@ -2,7 +2,7 @@
 ===================
 
 
-**Powker** est un jeu de poker (*Texas Holdem*) en ligne et multi-joueurs. C'est un projet scolaire réalisé en **C#**.
+**Powker** est un jeu de poker (*Texas Holdem*) en ligne et multi-joueurs, un projet scolaire réalisé en **C#**.
 
 ----------
 Index
@@ -23,7 +23,7 @@ Powker est un jeu de poker, de type Texas Holdem, qui ce joue à deux et en lign
 
 #### <i class="icon-level-up"></i> Client
 
-Le jeu se jouant a deux, il faudra alors deux clients lancés pour pouvoir y jouer. Une fois connecté, chaque client se voit attribué sa main. Ensuite le joueur qui n'est pas le dealer dépose la petite blinde et la manche des blindes commence par le dealer. Pour chaque tour, le joueur a le choix parmi les actions suivantes: [**C**]*heck*/[**C**]*all*, [**R**]*aise*, [**F**]*old*, [**A**]*ll-in*
+Le jeu se jouant à deux, il faudra alors deux clients lancés pour pouvoir y jouer. Une fois connecté, chaque client se voit attribuer sa main. Ensuite, le joueur qui n'est pas le dealer dépose la petite blind et la manche des blinds commence par le dealer. Pour chaque tour, le joueur a le choix parmi les actions suivantes: [**C**]*heck*/[**C**]*all*, [**R**]*aise*, [**F**]*old*, [**A**]*ll-in*
 
 #### <i class="icon-level-down"></i> Serveur
 
@@ -45,15 +45,15 @@ Une fois le serveur lancé, celui-ci va attendre que deux joueurs se connectent 
 ----------
 
 
-Protocol
+Protocole
 -------------------
 
-Le protocol utilise *NetworkComms* pour la communication Client/Serveur ainsi que *protobuf* pour la sérialisation des données.
+Le protocole utilise *NetworkComms* pour la communication Client/Serveur ainsi que *protobuf* pour la sérialisation des données.
 
 > **Note:**
 
-> - Protocol Intelligent.
-> - Protocol Rapide.
+> - Protocole Intelligent.
+> - Protocole Rapide.
 > - Gestion de la connexion automatique.
 > - Modulaire via les contextes.
 

@@ -223,9 +223,6 @@ namespace PokerServ
                         this.showdownCards.Add(player.Name, player.Cards);
                     }
                 }
-                Console.WriteLine(this.players.First().Cards.Count());
-                Console.WriteLine(this.players.Last().Cards.Count());
-                Console.WriteLine(this.communityCards.Count());
                 var betterHand = Logic.CompareCards(
                     this.players.First().Cards.Concat(this.communityCards).ToList(),
                     this.players.Last().Cards.Concat(this.communityCards).ToList());
@@ -272,14 +269,14 @@ namespace PokerServ
 
             foreach (var player in this.players)
             {
-                //waitPlayer = false;
+                waitPlayer = false;
                 var endRoundContext = new EndRoundContext(this.bettingLogic.RoundBets);
                 player.EndRound(endRoundContext);
-                /*player.Connection.SendObject("EndRoundContext", endRoundContext);
+                player.Connection.SendObject("EndRoundContext", endRoundContext);
                 while (!waitPlayer)
                 {
                     Thread.Sleep(200);
-                }*/
+                }
             }
         }
     }

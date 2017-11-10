@@ -51,9 +51,11 @@ namespace Poker
             NetworkComms.AppendGlobalIncomingPacketHandler<StartGameContext>("StartGameContext", StartGameContextMessage);
             NetworkComms.AppendGlobalIncomingPacketHandler<StartHandContext>("StartHandContext", StartHandContextMessage);
             NetworkComms.AppendGlobalIncomingPacketHandler<StartRoundContext>("StartRoundContext", StartRoundContextMessage);
+            NetworkComms.AppendGlobalIncomingPacketHandler<EndGameContext>("EndGameContext", EndGameContextMessage);
+            NetworkComms.AppendGlobalIncomingPacketHandler<EndHandContext>("EndHandContext", EndHandContextMessage);
             NetworkComms.AppendGlobalIncomingPacketHandler<EndRoundContext>("EndRoundContext", EndRoundContextMessage);
-            NetworkComms.AppendGlobalIncomingPacketHandler<EndRoundContext>("EndHandContext", EndRoundContextMessage);
             NetworkComms.AppendGlobalIncomingPacketHandler<TurnContext>("TurnContext", TurnContextMessage);
+
 
             Connection.StartListening(ConnectionType.TCP, new IPEndPoint(IPAddress.Any, 0));
 
@@ -84,11 +86,7 @@ namespace Poker
         private void PrintIncomingMessage(PacketHeader header, Connection connection, string message)
         {
             consoleInterface.ClearMsg();
-            if (message == "Game started...")
-            {
-                consoleInterface.DrawGameBoard();
-            }
-            else if (message == "Your are Connected to Powker! Wait Another Player...")
+            if (message == "Your are Connected to Powker! Wait Another Player...")
             {
                 ConsoleConfig.WriteOnConsole(6, 55, "Connected");
             }
@@ -100,6 +98,16 @@ namespace Poker
             consoleInterface.ClearMsg();
             consolePlayer.StartGame(message);
             consoleInterface.SetMsg("Game started...");
+            consoleInterface.DrawGameBoard();
+            NetworkComms.SendObject("Reply", serverIP, serverPort, "OK");
+        }
+
+        private void EndGameContextMessage(PacketHeader header, Connection connection, EndGameContext message)
+        {
+            consoleInterface.ClearMsg();
+            consolePlayer.EndGame(message);
+            string rst = (message.WinName == consolePlayer.Name) ? "Victory" : "Defeat";
+            consoleInterface.SetMsg("       ~"+((message.WinName == consolePlayer.Name) ? "Victory~" : "Defeat~"));
             NetworkComms.SendObject("Reply", serverIP, serverPort, "OK");
         }
 
@@ -131,8 +139,9 @@ namespace Poker
         {
             consoleInterface.ClearMsg();
             consolePlayer.EndHand(message);
-            consoleInterface.SetMsg("Hand end");
+            consoleInterface.SetMsg("Hand end... Press Enter to continue");
             NetworkComms.SendObject("Reply", serverIP, serverPort, "OK");
+            //Console.ReadLine();
         }
 
         private void TurnContextMessage(PacketHeader header, Connection connection, TurnContext message)

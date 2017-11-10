@@ -90,7 +90,9 @@ namespace PokerServ
             var winner = this.allPlayers.FirstOrDefault(x => x.PlayerMoney.Money > 0);
             foreach (var player in this.allPlayers)
             {
-                player.EndGame(new EndGameContext(winner.Name));
+                EndGameContext EndGameContext = new EndGameContext(winner.Name);
+                player.EndGame(EndGameContext);
+                player.Connection.SendObject("EndGameContext", EndGameContext);
             }
 
             return winner;
