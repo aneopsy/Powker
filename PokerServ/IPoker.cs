@@ -2,7 +2,7 @@
 
 namespace PokerServ
 {
-    public interface ITexasHoldemGame
+    public interface IPoker
     {
         int HandsPlayed { get; }
 

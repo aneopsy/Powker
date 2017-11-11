@@ -11,7 +11,7 @@ namespace PokerServ
         void Play();
     }
 
-    public class TwoPlayersTexasHoldemGame : ITexasHoldemGame
+    public class SPoker : IPoker
     {
         private static readonly int[] SmallBlinds =
             {
@@ -28,7 +28,7 @@ namespace PokerServ
 
         private readonly int initialMoney;
 
-        public TwoPlayersTexasHoldemGame(InternalPlayer firstPlayer, InternalPlayer secondPlayer, int initialMoney = 1000)
+        public SPoker(InternalPlayer firstPlayer, InternalPlayer secondPlayer, int initialMoney = 1000)
         {
             if (firstPlayer == null)
             {

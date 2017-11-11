@@ -27,7 +27,7 @@ namespace PokerServ
         private List<InternalPlayer> Clients = new List<InternalPlayer>();
         public DataSerializer Serializer { get; set; }
         Dictionary<ShortGuid, HandShake> lastPeerMessageDict = new Dictionary<ShortGuid, HandShake>();
-        public ITexasHoldemGame game;
+        public IPoker game;
 
 
         public void Run()
@@ -52,7 +52,7 @@ namespace PokerServ
             {
                 if (Clients.Count() == 2)
                 {
-                    game = new TwoPlayersTexasHoldemGame(Clients.Last(), Clients.First());
+                    game = new SPoker(Clients.Last(), Clients.First());
                     game.Start();
                 }
                 Thread.Sleep(200);
